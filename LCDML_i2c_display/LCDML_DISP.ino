@@ -37,7 +37,8 @@ void LCDML_lcd_menu_display()
 			//case 0:
 			//	lcd.print("special"); // or datetime or other things
 			//	break;
-		
+
+	
 			default: // static content
 				lcd.print(LCDML.content[n]);
 				break;				

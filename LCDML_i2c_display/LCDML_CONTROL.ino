@@ -219,6 +219,77 @@ void LCDML_CONTROL_loop()
 
 
 
+/*
+// *********************************************************************
+// *************** (3) CONTROL WITH ENCODER ****************************
+// *********************************************************************
+#elif(_LCDML_CONTROL_cfg == 3)
+// settings
+  #define _LCDML_CONTROL_encoder_pin_a           9 // pin encoder b
+  #define _LCDML_CONTROL_encoder_pin_b           8 // pin encoder a
+  #define _LCDML_CONTROL_encoder_pin_button      7 // pin taster
+  #define _LCDML_CONTROL_encoder_high_active     0  // (0 = low active (pullup), 1 = high active (pulldown)) button
+                                                      // // http://playground.arduino.cc/CommonTopics/PullUpDownResistor
+// global defines
+  uint8_t  g_LCDML_CONTROL_encoder_t_prev = 0;
+  uint8_t  g_LCDML_CONTROL_encoder_a_prev = 0;
+
+// *********************************************************************
+// setup
+void LCDML_CONTROL_setup()
+{
+  // set encoder update intervall time 
+  LCDML_BACK_dynamic_setLoopTime(LCDML_BACKEND_control, 5UL);  // 5ms 
+
+  // init pins  
+  pinMode(_LCDML_CONTROL_encoder_pin_a      , INPUT_PULLUP);
+  pinMode(_LCDML_CONTROL_encoder_pin_b      , INPUT_PULLUP);
+  pinMode(_LCDML_CONTROL_encoder_pin_button , INPUT_PULLUP); 
+}
+// *********************************************************************
+// loop
+void LCDML_CONTROL_loop()
+{    
+  // read encoder status
+  unsigned char a = digitalRead(_LCDML_CONTROL_encoder_pin_a);
+  unsigned char b = digitalRead(_LCDML_CONTROL_encoder_pin_b);
+  unsigned char t = digitalRead(_LCDML_CONTROL_encoder_pin_button);
+  
+  // change button status if high and low active are switched
+  if (_LCDML_CONTROL_encoder_high_active == 1) {
+    t != t;
+  }
+  
+  // check encoder status and set control menu
+  if (!a && g_LCDML_CONTROL_encoder_a_prev) {
+    g_LCDML_CONTROL_encoder_t_prev = 1;
+    
+    if (!b) { LCDML_BUTTON_up();   }
+    else    { LCDML_BUTTON_down(); }            
+  } 
+  else {
+    // check button press time for enter
+    if((millis() - g_LCDML_DISP_press_time) >= _LCDML_DISP_cfg_button_press_time) {
+      g_LCDML_DISP_press_time = millis(); // reset button press time
+      
+      // press button once
+      if (!t && g_LCDML_CONTROL_encoder_t_prev == 0) {          
+          LCDML_BUTTON_enter();          
+      } 
+      else {
+        g_LCDML_CONTROL_encoder_t_prev = 0;
+      }
+    }      
+  }
+  g_LCDML_CONTROL_encoder_a_prev = a;  // set new encoder status 
+  
+}
+// *********************************************************************
+// ******************************* END *********************************
+// *********************************************************************
+
+*/
+
 
 // *********************************************************************
 // *************** (3) CONTROL WITH ENCODER ****************************
