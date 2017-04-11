@@ -26,7 +26,10 @@ dht DHT;
 #define DHT11_PIN 5
 
 //--------------------------------------------------------------------------------------
-  
+int EEPROMaddress_kids = 0;
+
+
+//--------------------------------------------------------------------------------------  
   // lib config
   #define _LCDML_DISP_cfg_button_press_time          200    // button press time in ms
   #define _LCDML_DISP_cfg_scrollbar                  1      // enable a scrollbar
