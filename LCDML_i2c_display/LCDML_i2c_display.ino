@@ -25,6 +25,17 @@
 dht DHT;
 #define DHT11_PIN 5
 
+
+/*
+Measuring Current Using ACS712
+*/
+const int analogIn = A0;
+int mVperAmp = 66; // use 100 for 20A Module and 66 for 30A Module
+int RawValue= 0;
+int ACSoffset = 2500; 
+double Voltage = 0;
+double Amps = 0;
+
 //--------------------------------------------------------------------------------------
 int EEPROMaddress_kids = 0;
 
@@ -118,7 +129,7 @@ Adafruit_NeoPixel ring = Adafruit_NeoPixel(NUMPIXELS_RING, PIN_RING, NEO_GRB + N
 
    LCDML_DISP_add      (14  , _LCDML_G1  , LCDML_root          , 2   , "Functions"              , LCDML_FUNC);
    LCDML_DISP_add      (15  , _LCDML_G1  , LCDML_root_2        , 1   , "speakers"               , LCDML_FUNC);
-   LCDML_DISP_add      (16  , _LCDML_G1  , LCDML_root_2        , 2   , "electronic labor"       , LCDML_FUNC);
+   LCDML_DISP_add      (16  , _LCDML_G1  , LCDML_root_2        , 2   , "electronic labor"       , LCDML_FUNC_electronic_labor);
    LCDML_DISP_add      (17  , _LCDML_G1  , LCDML_root_2        , 3   , "dock station"           , LCDML_FUNC);
    LCDML_DISP_add      (18  , _LCDML_G1  , LCDML_root_2        , 4   , "foto studio"            , LCDML_FUNC);
    LCDML_DISP_add      (19  , _LCDML_G1  , LCDML_root_2        , 5   , "foam cutting"           , LCDML_FUNC);

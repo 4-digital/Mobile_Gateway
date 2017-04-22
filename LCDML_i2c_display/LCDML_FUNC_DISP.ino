@@ -338,3 +338,52 @@ void LCDML_DISP_loop_end(LCDML_FUNC_initscreen)
   // you can here reset some global vars or do nothing
   LCDML.goRoot(); // go to root element (first element of this menu with id=0)
 }
+
+// *********************************************************************
+void LCDML_DISP_setup(LCDML_FUNC_electronic_labor)
+// *********************************************************************
+{
+  // setup function 
+  lcd.setCursor(0, 0);
+  lcd.print(F("Electronic Labor"));
+ 
+}
+
+void LCDML_DISP_loop(LCDML_FUNC_electronic_labor) 
+{
+  // loop function, can be run in a loop when LCDML_DISP_triggerMenu(xx) is set
+  // the quit button works in every DISP function without any checks; it starts the loop_end function
+  RawValue = analogRead(analogIn);
+ Voltage = (RawValue / 1024.0) * 5000; // Gets you mV
+ Amps = ((Voltage - ACSoffset) / mVperAmp);
+ 
+ 
+ Serial.print("Raw Value = " ); // shows pre-scaled value 
+ Serial.print(RawValue); 
+ Serial.print("\t mV = "); // shows the voltage measured 
+ Serial.print(Voltage,3); // the '3' after voltage allows you to display 3 digits after decimal point
+ Serial.print("\t Amps = "); // shows the voltage measured 
+ Serial.println(Amps,3); // the '3' after voltage allows you to display 3 digits after decimal point
+ lcd.setCursor(1, 2);
+  lcd.print(" mV =");
+  lcd.setCursor(10, 2);
+  lcd.print(Voltage,3);
+
+lcd.setCursor(1, 3);
+  lcd.print("Amps = ");
+  lcd.setCursor(13, 3);
+  lcd.print(Amps,3);
+
+ //delay(2500); 
+ 
+  if(LCDML_BUTTON_checkAny()) { // check if any button is presed (enter, up, down, left, right)
+    // LCDML_DISP_funcend calls the loop_end function
+    LCDML_DISP_funcend();
+  } 
+}
+
+void LCDML_DISP_loop_end(LCDML_FUNC_electronic_labor)
+{
+  // this functions is ever called when a DISP function is quit
+  // you can here reset some global vars or do nothing  
+}  
